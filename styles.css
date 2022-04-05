@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.icon-max {
+    max-width: 90px;
+    width: 50%;
+}
+
+.section-one {
+    background-repeat: no-repeat;
+    min-width: 100%;
+    background-image: url("/images/47-477059_ducati-bikes-wallpapers-4k.jpg");
+    background-size:cover;
+    background-position:center;
+}
