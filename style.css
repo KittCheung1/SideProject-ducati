@@ -12,11 +12,16 @@
 .section-one {
     background-repeat: no-repeat;
     min-width: 100%;
-    background-image: url("/images/47-477059_ducati-bikes-wallpapers-4k.jpg");
+    background-image: url("/FE-ducati/images/47-477059_ducati-bikes-wallpapers-4k.jpg");
     background-size:cover;
     background-position:center;
 }
 .h4.text-center.p-4.p-sm-5{
     padding: 500px;
 
+}
+.img-fluid{
+   aspect-ratio: 2/1;
+   object-fit: contain;
+   width: clamp(600px, 600vw, 1000px);
 }
