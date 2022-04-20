@@ -1,4 +1,6 @@
 ﻿#nullable disable
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DucatiWebApi.Data
@@ -12,5 +14,13 @@ namespace DucatiWebApi.Data
 
         public DbSet<DucatiWebApi.Model.Motorcycle> Motorcycle { get; set; }
 
+
+        public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
+        {
+            public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
+            {
+            }
+        }
     }
 }
