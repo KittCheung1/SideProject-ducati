@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DucatiWebApi.Model;
+using Microsoft.AspNetCore.Identity;
 
 namespace DucatiWebApi.User
 {
     public class User : IdentityUser<long>
     {
-    }
-
-    public class Role : IdentityRole<long>
-    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public Motorcycle Motorcycle { get; set; }
     }
 
 }

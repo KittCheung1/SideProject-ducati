@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.VisualBasic;
 
 var builder = WebApplication.CreateBuilder(args);
 var AllowMySpecificOrigins = "_allowMySpecificOrigins";
+
 
 
 builder.Services.AddDbContext<DucatiWebApiContext>(options =>
@@ -32,12 +32,12 @@ builder.Services
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateAudience = false,
-        ValidAudience = builder.Configuration.GetConnectionString("DucatiWebApiContext"),
+        ValidAudience = builder.Configuration["Jwt:Audience"],
         ValidateIssuer = false,
-        ValidIssuer = builder.Configuration.GetConnectionString("DucatiWebApiContext"),
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidateLifetime = false,
         ValidateIssuerSigningKey = false,
-        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Constants.JwtKey)),
+        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
     };
 });
 // Add services to the container.
