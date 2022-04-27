@@ -25,3 +25,24 @@
    object-fit: contain;
    width: clamp(600px, 600vw, 1000px);
 }
+
+/* login Form */
+form {border: 3px solid #746b6b; text-align: left; display:inline-block;   color:white; }
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 5px 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  .login-form-container {
+    padding: 16px;
+  }
+
+  span.pass {
+    float: right;
+    padding-top: 16px;
+    color: black;
+  }
