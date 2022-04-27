@@ -31,12 +31,11 @@ builder.Services
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateAudience = false,
+        ValidateAudience = true,
         ValidAudience = builder.Configuration["Jwt:Audience"],
-        ValidateIssuer = false,
+        ValidateIssuer = true,
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidateLifetime = false,
-        ValidateIssuerSigningKey = false,
+        ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
     };
 });
