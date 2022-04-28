@@ -1,5 +1,6 @@
-﻿using DucatiWebApi.Data;
+﻿using DucatiWebApi.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -50,6 +51,14 @@ builder.Services.AddCors(options =>
                       });
 });
 
+builder.Services.AddIdentity<User, Role>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<DucatiWebApiContext>()
+.AddDefaultTokenProviders();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -70,6 +79,8 @@ app.UseHttpsRedirection();
 app.UseCors(AllowMySpecificOrigins);
 
 app.UseStaticFiles();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
