@@ -61,7 +61,7 @@ namespace DucatiWebApi.Controllers
         [HttpPost("/auth/refreshToken")]
         public LoginResponseDTO RefreshToken()
         {
-            var cookie = HttpContext.Request.Cookies[RefreshTokenCookieKey];
+            var cookie = HttpContext.Request.Cookies["RefreshToken"];
             if (cookie != null)
             {
                 var user = this._userManager.Users.FirstOrDefault(user => user.SecurityStamp == cookie);
@@ -87,7 +87,7 @@ namespace DucatiWebApi.Controllers
             options.Secure = true;
             options.SameSite = SameSiteMode.Strict;
             options.Expires = DateTime.Now.AddMinutes(60);
-            cookies.Append(RefreshTokenCookieKey, user.SecurityStamp, options);
+            cookies.Append("RefreshToken", user.SecurityStamp, options);
         }
 
         private static string CreateJWT(User user)
