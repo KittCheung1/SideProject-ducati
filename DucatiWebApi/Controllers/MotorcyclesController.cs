@@ -1,4 +1,5 @@
 ﻿#nullable disable
+using DucatiWebApi.Data;
 using DucatiWebApi.DTO;
 using DucatiWebApi.Model;
 using Microsoft.AspNetCore.Mvc;

@@ -1,8 +1,9 @@
 ﻿#nullable disable
+using DucatiWebApi.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DucatiWebApi.Model;
+namespace DucatiWebApi.Data;
 
 public class DucatiWebApiContext : IdentityDbContext<User, Role, long>
 {

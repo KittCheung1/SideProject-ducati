@@ -1,4 +1,5 @@
-﻿using DucatiWebApi.Model;
+﻿using DucatiWebApi.Data;
+using DucatiWebApi.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
