@@ -2,6 +2,9 @@
 using DucatiWebApi.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace DucatiWebApi.Controllers
 {
@@ -53,6 +56,60 @@ namespace DucatiWebApi.Controllers
             {
                 return LoginResponseDTO.Failed;
             }
+        }
+
+        [HttpPost("/auth/refreshToken")]
+        public LoginResponseDTO RefreshToken()
+        {
+            var cookie = HttpContext.Request.Cookies[RefreshTokenCookieKey];
+            if (cookie != null)
+            {
+                var user = this._userManager.Users.FirstOrDefault(user => user.SecurityStamp == cookie);
+                if (user != null)
+                {
+                    var jwtToken = CreateJWT(user);
+                    return new LoginResponseDTO(true, jwtToken);
+                }
+                else
+                {
+                    return LoginResponseDTO.Failed;
+                }
+            }
+            else
+            {
+                return LoginResponseDTO.Failed;
+            }
+        }
+        private static void AppendRefreshTokenCookie(User user, IResponseCookies cookies)
+        {
+            var options = new CookieOptions();
+            options.HttpOnly = true;
+            options.Secure = true;
+            options.SameSite = SameSiteMode.Strict;
+            options.Expires = DateTime.Now.AddMinutes(60);
+            cookies.Append(RefreshTokenCookieKey, user.SecurityStamp, options);
+        }
+
+        private static string CreateJWT(User user)
+        {
+            var secretkey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("secretKey"));
+            var credentials = new SigningCredentials(secretkey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+        new Claim(ClaimTypes.Name, user.UserName), // NOTE: this will be the "User.Identity.Name" value
+        new Claim(JwtRegisteredClaimNames.Email, user.Email),
+        new Claim(JwtRegisteredClaimNames.Jti, user.Id.ToString()),
+    };
+
+            var token = new JwtSecurityToken(
+                issuer: "Jwt:Issuer",
+                audience: "Jwt:Audience",
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(60),
+                signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

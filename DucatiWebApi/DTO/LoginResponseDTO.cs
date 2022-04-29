@@ -14,6 +14,6 @@
             IsSuccess = isSuccess;
             Jwt = jwt;
         }
-        public static LoginResponseDTO Failed { get; internal set; }
+        public static LoginResponseDTO Failed => new LoginResponseDTO();
     }
 }
