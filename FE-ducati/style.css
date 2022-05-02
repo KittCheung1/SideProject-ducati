@@ -60,11 +60,16 @@ span.pass {
 .form-container {
     display: block;
 }
+
 .products-container{
     color: white;
     text-align: center;
 }
+
 .bike-container{
     color: white;
+}
+
+.bike-name{
     text-align: center;
 }
