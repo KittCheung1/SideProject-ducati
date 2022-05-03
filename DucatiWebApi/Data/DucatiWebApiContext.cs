@@ -1,16 +1,17 @@
 ﻿#nullable disable
+using DucatiWebApi.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DucatiWebApi.Data
+namespace DucatiWebApi.Data;
+
+public class DucatiWebApiContext : IdentityDbContext<User, Role, long>
 {
-    public class DucatiWebApiContext : DbContext
+    public DucatiWebApiContext(DbContextOptions options)
+        : base(options)
     {
-        public DucatiWebApiContext(DbContextOptions<DucatiWebApiContext> options)
-            : base(options)
-        {
-        }
-
-        public DbSet<DucatiWebApi.Model.Motorcycle> Motorcycle { get; set; }
-
     }
+
+    public DbSet<DucatiWebApi.Model.Motorcycle> Motorcycle { get; set; }
+
 }
