@@ -10,7 +10,7 @@ async function getBikesAsync() {
         let div = document.createElement("div");
         div.className="col-md-6 justify-content-around ";
         
-        div.innerHTML= `<img class="img-fluid" src="https://localhost:7211/${item.imagePath}"></img><p>${item.name}</p><p>Price: $${item.price}</p>`
+        div.innerHTML= `<a href = "/FE-ducati/html/${item.name}.html"> <img class="img-fluid" src="https://localhost:7211/${item.imagePath}"></img></a><p>${item.name}</p><p>Price: $${item.price}</p>`
         list.appendChild(div);
         document.getElementById("myList").appendChild(div)
     })
