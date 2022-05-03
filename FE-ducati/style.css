@@ -15,6 +15,7 @@
     background-image: url("/FE-ducati/images/47-477059_ducati-bikes-wallpapers-4k.jpg");
     background-size: cover;
     background-position: center;
+    text-shadow: black 0.3em 0.3em 0.4em;
 }
 
 .h4.text-center.p-4.p-sm-5 {
