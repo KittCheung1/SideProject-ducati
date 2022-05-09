@@ -10,7 +10,7 @@ var AllowMySpecificOrigins = "_allowMySpecificOrigins";
 
 
 
-builder.Services.AddDbContext<DucatiWebApiContext>(options =>
+builder.Services.AddDbContextFactory<DucatiWebApiContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DucatiWebApiContext")));
 
 builder.Services.AddScoped(p =>
