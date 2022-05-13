@@ -1,3 +1,4 @@
+const url = "https://localhost:7211/api/users";
 const username = document.getElementById("username").value
 const password = document.getElementById("password").value
 
@@ -17,6 +18,31 @@ document.addEventListener("DOMContentLoaded", ()=>{
         createAccountForm.classList.add("form--hidden");
     });
 
+    // at loginForm submission grab the event object 
+    loginForm.addEventListener("submit", e =>{
+        e.preventDefault();
+        const login = "https://localhost:7211/api/users";
+
+        fetch(login, {
+              method: "POST",
+              headers: {
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username: form.username.value,
+                password: form.password.value,
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => console.log(data))
+              .catch((err) => {
+                console.log(err);
+            });
+            
+            // when failure at fetching while doing a login send this message
+            setFormMessage(loginForm, "error", "Wrong username or password")
+    });
 });
 
 // formElement = loginForm or createAccountForm
@@ -26,4 +52,8 @@ function setFormMessage(formElement, type, message) {
     const messageElement = formElement.querySelector(".form__message");
 
     messageElement.textContent = message;
+    messageElement.classList.remove("form_message-success", "form_message-error");
+    messageElement.classList.add(`form_message-${type}`);
 }
+
+setFormMessage(loginForm, "success", "You Logged in!");
