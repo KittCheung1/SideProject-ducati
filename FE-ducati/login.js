@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         const login = "https://localhost:7211/api/users";
 
         fetch(login, {
-              method: "POST",
+              method: "GET",
               headers: {
                 Accept: "application/json, text/plain, */*",
                 "Content-Type": "application/json",
